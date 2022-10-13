@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  align-items: center;
+  background-color: rgb(123, 123, 202);
+  height: 5rem;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
