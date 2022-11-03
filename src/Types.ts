@@ -5,6 +5,7 @@ export interface StorageProductType {
   amount: number;
   unit: string;
   lotnum: string;
+  _id?: string;
 }
 
 export interface NewUser {

@@ -14,7 +14,7 @@ const marketSlice = createSlice({
   name: "marketSlice",
   initialState,
   reducers: {
-    set_market(state, action: PayloadAction<IMarket>) {
+    set_market(_state, action: PayloadAction<IMarket>) {
       return action.payload;
     },
   },
