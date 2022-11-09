@@ -1,3 +1,19 @@
+export enum Unit {
+  Kilograms = "KG",
+  Packages = "PKG",
+  Packets = "PKT",
+  Pieces = "PC",
+}
+
+export interface NewProduct {
+  name: string;
+  division: string;
+  supplier: string;
+}
+export interface IProduct extends NewProduct {
+  id: string;
+}
+
 export interface StorageProductType {
   name: string;
   division: string;

@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { initializeMarket } from "../../state/marketReducer";
 import { Button, Grid } from "@mui/material";
 import { StorageProductType } from "../../Types";
-import Order from "../Order";
 
 const MyMarket = () => {
   const dispatch = useAppDispatch();
@@ -16,8 +15,6 @@ const MyMarket = () => {
   if (!market) {
     return <p>loading...</p>;
   }
-
-  console.log(market);
 
   return (
     <div>

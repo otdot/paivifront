@@ -19,6 +19,7 @@ const SignIn = () => {
       console.log(`An error occurred while logging in ${err}`);
     }
   };
+
   return (
     <Formik initialValues={{ name: "", password: "" }} onSubmit={handleSubmit}>
       <Form style={{ margin: "1rem" }}>

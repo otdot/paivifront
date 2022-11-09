@@ -8,6 +8,7 @@ import { useAppDispatch } from "./hooks/redux";
 import { set_user } from "./state/userReducer";
 import { setToken } from "./services/marketOrder";
 import MyMarket from "./components/MyMarket";
+import { initializeMarket } from "./state/marketReducer";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ function App() {
       const user = JSON.parse(loggedUser);
       setToken(user.token);
       dispatch(set_user(user.name));
+      dispatch(initializeMarket());
     };
 
     initializeUser();
