@@ -1,3 +1,18 @@
+export interface IOrderValues {
+  name: string;
+  amount: number;
+  unit: string;
+}
+
+export type NewStorageProduct = Omit<
+  StorageProductType,
+  "lotnum" | "bestbefore"
+>;
+
+export interface IOrderSliceInitial {
+  order: NewStorageProduct[];
+  editOrder: IOrderValues;
+}
 export enum Unit {
   Kilograms = "KG",
   Packages = "PKG",
@@ -14,13 +29,11 @@ export interface IProduct extends NewProduct {
   id: string;
 }
 
-export interface StorageProductType {
-  name: string;
-  division: string;
-  supplier: string;
+export interface StorageProductType extends NewProduct {
   amount: number;
   unit: string;
   lotnum: string;
+  bestbefore: string;
   _id?: string;
 }
 

@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { initializeMarket } from "../../state/marketReducer";
 import { Button, Grid } from "@mui/material";
 import { StorageProductType } from "../../Types";
+import { displayDate } from "../../services/general";
 
 const MyMarket = () => {
   const dispatch = useAppDispatch();
@@ -29,6 +30,7 @@ const MyMarket = () => {
               product: {product.name}, amount: {product.amount}
               {product.unit}s, supplier:
               {product.supplier}
+              {product.bestbefore && displayDate(product.bestbefore)}
             </p>
           ))}
         </Grid>
