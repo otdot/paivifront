@@ -9,6 +9,7 @@ import { set_user } from "./state/userReducer";
 import { setToken } from "./services/marketOrder";
 import MyMarket from "./components/MyMarket";
 import { initializeMarket } from "./state/marketReducer";
+import Order from "./components/Order";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -36,6 +37,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/signin" element={<SignInUp />} />
           <Route path="/market" element={<MyMarket />} />
+          <Route path="/order" element={<Order />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -10,6 +10,11 @@ export const setToken = (userToken: string | null) => {
   token = `bearer ${userToken}`;
 };
 
+export const getMarkets = async () => {
+  const markets = await axios.get("/market");
+  return markets.data;
+};
+
 export const getMarket = async () => {
   if (token === null) {
     throw new Error("user token missing");

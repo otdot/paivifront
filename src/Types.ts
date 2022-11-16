@@ -42,6 +42,7 @@ export interface NewUser {
   password: string;
   position: string;
   confirmpassword: string;
+  market: string;
 }
 
 export interface LoginInput {

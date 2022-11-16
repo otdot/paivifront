@@ -8,11 +8,9 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <div style={{ minHeight: "79vh" }}>
-        <Container maxWidth="lg">
-          <Outlet />
-        </Container>
-      </div>
+      <Container style={{ padding: "1rem", minHeight: "84vh" }} maxWidth="lg">
+        <Outlet />
+      </Container>
       <Footer />
     </>
   );

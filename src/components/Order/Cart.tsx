@@ -1,4 +1,12 @@
-import { Button } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import AWN from "awesome-notifications";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { makeOrder } from "../../services/marketOrder";
@@ -8,6 +16,7 @@ import {
   reset_orders,
 } from "../../state/orderReducer";
 import { IOrderValues, NewStorageProduct } from "../../Types";
+import classes from "./Order.module.css";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -57,29 +66,38 @@ const Cart = () => {
   };
 
   return (
-    <div>
-      {orders
-        .map((order) => (
+    <div className={classes.cart}>
+      <div className={classes.cartHeader}>
+        <Typography variant="h6" component="div">
+          Product cart
+        </Typography>
+        <Button variant="contained" onClick={() => orderProducts(orders)}>
+          Order Products
+        </Button>
+      </div>
+      <List>
+        {orders.map((order) => (
           <div style={{ marginBottom: "0.5rem" }} key={order.name}>
-            <p
-              onClick={() => handleEditOrder(order.name)}
-              style={{ display: "inline", marginBottom: "0.5rem" }}
+            <ListItem
+              secondaryAction={
+                <IconButton
+                  onClick={() => deleteProductFromOrders(order.name)}
+                  edge="end"
+                  aria-label="delete"
+                >
+                  <DeleteIcon />
+                </IconButton>
+              }
             >
-              {order.name}
-            </p>
-            <p
-              onClick={() => deleteProductFromOrders(order.name)}
-              style={{ display: "inline" }}
-            >
-              {" "}
-              X
-            </p>
+              <ListItemText
+                onClick={() => handleEditOrder(order.name)}
+                primary={order.name}
+                secondary={`${order.amount} ${order.unit}`}
+              />
+            </ListItem>
           </div>
-        ))
-        .reverse()}
-      <Button variant="contained" onClick={() => orderProducts(orders)}>
-        Order Products
-      </Button>
+        ))}
+      </List>
     </div>
   );
 };

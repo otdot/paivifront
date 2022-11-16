@@ -1,8 +1,9 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import { login } from "../../services/login";
-import { setToken } from "../../services/marketOrder";
+import { getMarket, setToken } from "../../services/marketOrder";
 import { LoginInput } from "../../Types";
 import { User } from "../../Types";
+import { initializeMarket } from "../marketReducer";
 
 const initialState: User = { name: null };
 
@@ -33,6 +34,9 @@ export const setLoginData = (credentials: LoginInput) => {
       window.localStorage.setItem("loggedUser", JSON.stringify(res));
       dispatch(set_user(res.name));
       setToken(res.token);
+      if (window.localStorage.getItem("loggedUser")) {
+        dispatch(initializeMarket());
+      }
     } catch (err: unknown) {
       console.log(`An error occurred: ${err}`);
     }

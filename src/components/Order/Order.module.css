@@ -1,0 +1,8 @@
+.cartHeader {
+  display: flex;
+  flex-direction: row;
+}
+
+.cartHeader div {
+  margin: 0 0.5rem;
+}

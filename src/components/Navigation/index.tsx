@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { set_market } from "../../state/marketReducer";
 import { userLogout } from "../../state/userReducer";
 import { User } from "../../Types";
 
@@ -12,6 +13,15 @@ const Navigation = () => {
   const handleLogout = () => {
     console.log("logging out");
     dispatch(userLogout());
+    dispatch(
+      set_market({
+        name: "",
+        personnel: [],
+        productPlacements: [],
+        storage: [],
+        id: "",
+      })
+    );
   };
   return (
     <nav>

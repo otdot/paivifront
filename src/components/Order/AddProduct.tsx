@@ -1,7 +1,8 @@
-import { Button } from "@mui/material";
+import { Button, capitalize } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { sortArr } from "../../services/general";
 import {
   addOrder,
   add_order_to_cart,
@@ -18,6 +19,12 @@ const AddProduct = () => {
   const dispatch = useAppDispatch();
   const initialValues = useAppSelector((state) => state.order.editOrder);
   const products = useAppSelector((state) => state.products);
+  const sortedproducts: any = sortArr(
+    products.map((p) => ({
+      ...p,
+      name: capitalize(p.name),
+    }))
+  );
   const orders = useAppSelector((state) => state.order.order);
   const [details, setDetails] = useState<Omit<NewProduct, "name">>({
     division: "",
@@ -62,6 +69,10 @@ const AddProduct = () => {
     });
   };
 
+  if (!products) {
+    return <p>loading...</p>;
+  }
+
   return (
     <Formik
       enableReinitialize
@@ -74,7 +85,8 @@ const AddProduct = () => {
             <SelectField
               name="name"
               label="Product"
-              options={products.map((p) => p.name)}
+              options={sortedproducts.map((p: any) => p.name)}
+              placeholder="Search for products"
               onChange={(e: any) => {
                 handleChange(e);
                 getDetails(e.target.value);
@@ -93,9 +105,10 @@ const AddProduct = () => {
               label="Unit"
               options={unitOptions}
               onChange={handleChange}
+              placeholder="Search for products"
             />
             <Button variant="contained" type="submit">
-              Add Order
+              Add Product
             </Button>
           </Form>
         );
