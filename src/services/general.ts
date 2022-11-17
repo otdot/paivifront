@@ -19,15 +19,17 @@ export const combineStorage = (storage: StorageProductType[]) => {
   return Object.values({
     ...storage.reduce((whole: any, curr: any) => {
       const name = capitalize(curr.name);
+      const division = capitalize(curr.division);
       if (!whole[`${curr.name}${curr.unit}`]) {
-        whole[`${curr.name}${curr.unit}`] = { ...curr, name };
+        whole[`${curr.name}${curr.unit}`] = { ...curr, name, division };
       } else {
         const temp = {
           ...curr,
           amount: whole[`${curr.name}${curr.unit}`].amount + curr.amount,
           name,
+          division,
         };
-        whole[`${curr.name}${curr.unit}`] = { ...temp };
+        whole[`${curr.name}${curr.unit}`] = temp;
       }
       return whole;
     }, {}),

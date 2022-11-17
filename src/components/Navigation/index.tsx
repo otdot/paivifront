@@ -28,6 +28,7 @@ const Navigation = () => {
       {user.name !== null ? (
         <>
           <Button onClick={() => navigate("/market")}>MyMarket</Button>
+          <Button onClick={() => navigate("/storage")}>Storage</Button>
           <Button onClick={handleLogout}>Logout</Button>
         </>
       ) : (

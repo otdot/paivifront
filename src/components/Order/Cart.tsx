@@ -9,7 +9,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import AWN from "awesome-notifications";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { makeOrder } from "../../services/marketOrder";
+import { makeOrder } from "../../services/market";
 import {
   delete_order,
   modify_editOrder,

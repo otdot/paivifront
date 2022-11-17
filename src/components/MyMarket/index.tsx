@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { initializeMarket } from "../../state/marketReducer";
 import {
   Avatar,
-  Button,
   Grid,
   List,
   ListItem,
@@ -11,13 +10,12 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { combineStorage, displayDate, sortArr } from "../../services/general";
 import PersonIcon from "@mui/icons-material/Person";
+import UpdatePlacements from "./UpdatePlacements";
 
 const MyMarket = () => {
   const dispatch = useAppDispatch();
   const market = useAppSelector((state) => state.market);
-  const storage: any = sortArr(combineStorage(market.storage));
 
   useEffect(() => {
     dispatch(initializeMarket());
@@ -41,23 +39,6 @@ const MyMarket = () => {
           <h1>{market.name}</h1>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Typography variant="h6" component="div">
-            Storage
-          </Typography>
-          <List>
-            {storage.map((product: any) => (
-              <ListItem key={product._id}>
-                <ListItemText
-                  primary={`${product.name} | ${product.supplier}`}
-                  secondary={`${product.amount}${product.unit}. BB: ${
-                    product.bestbefore && displayDate(product.bestbefore)
-                  }`}
-                />
-              </ListItem>
-            ))}
-          </List>
-        </Grid>
-        <Grid item xs={12} sm={6}>
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
             {market.personnel.length} Employee(s)
           </Typography>
@@ -77,8 +58,13 @@ const MyMarket = () => {
             ))}
           </List>
         </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+            Update Market Divisions
+            <UpdatePlacements />
+          </Typography>
+        </Grid>
       </Grid>
-      <Button variant="contained">Make an order</Button>
     </div>
   );
 };

@@ -1,5 +1,10 @@
 import axios from "axios";
-import { NewStorageProduct, StorageProductType } from "../Types";
+import {
+  IMarket,
+  NewStorageProduct,
+  ProductPlacement,
+  StorageProductType,
+} from "../Types";
 import { v4 as uuid } from "uuid";
 import { getRandomDate } from "./general";
 
@@ -30,15 +35,21 @@ export const makeOrder = async (
   id: string,
   orderArr: NewStorageProduct[]
 ): Promise<StorageProductType[]> => {
-  const date = getRandomDate();
-  console.log(date, typeof date);
   const orders: StorageProductType[] = orderArr.map((order) => ({
     ...order,
     lotnum: uuid(),
     bestbefore: getRandomDate(),
   }));
 
-  console.log(orderArr);
-  const res = await axios.patch(`/market/${id}`, { orders });
+  const res = await axios.patch(`/market/order/${id}`, { orders });
+  return res.data;
+};
+
+export const updateDivision = async (
+  division: ProductPlacement,
+  id: string
+): Promise<IMarket> => {
+  const newDivision = { productPlacements: [division] };
+  const res = await axios.patch(`/market/placements/${id}`, newDivision);
   return res.data;
 };

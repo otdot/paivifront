@@ -4,6 +4,11 @@ export interface IOrderValues {
   unit: string;
 }
 
+export interface ProductPlacement {
+  division: string;
+  aisle: number;
+}
+
 export type NewStorageProduct = Omit<
   StorageProductType,
   "lotnum" | "bestbefore"
@@ -13,6 +18,17 @@ export interface IOrderSliceInitial {
   order: NewStorageProduct[];
   editOrder: IOrderValues;
 }
+
+export enum Divisions {
+  fruitAndVegetables = "Fruit and Vegetables",
+  dryAndProcessedFood = "Dry and Processed Food",
+  meatAndFish = "Meat and Fish",
+  dairy = "Dairy",
+  bread = "Bread",
+  preparedFoods = "Prepared Foods",
+  utilityGoods = "Utility Goods",
+}
+
 export enum Unit {
   Kilograms = "KG",
   Packages = "PKG",

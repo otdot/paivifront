@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { ErrorMessage, Field, FieldProps } from "formik";
 import { useState } from "react";
-import { IMarket, Unit } from "../../Types";
+import { Divisions, IMarket, Unit } from "../../Types";
 
 interface ISelectField {
   label: string;
@@ -22,7 +22,7 @@ type MarketOptions = Pick<IMarket, "name" | "id">;
 interface IWideSelectField {
   label: string;
   name: string;
-  options: MarketOptions[];
+  options: MarketOptions[] | Divisions[];
   onChange: (event: any, child: any) => void;
   placeholder: string;
 }
@@ -93,12 +93,21 @@ export const WideSelectField = ({
   return (
     <FormControl fullWidth style={{ margin: "2rem 0" }}>
       <InputLabel>{label}</InputLabel>
-      <Select defaultValue="" onChange={onChange} label={label} name={name}>
-        {options.map((option: any) => (
-          <MenuItem key={option.id} value={option.id}>
-            {option.name}
-          </MenuItem>
-        ))}
+      <Select onChange={onChange} defaultValue="" label={label} name={name}>
+        {options.map((option: any) => {
+          if (!option.id || option.name) {
+            return (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            );
+          }
+          return (
+            <MenuItem key={option.id} value={option.id}>
+              {option.name}
+            </MenuItem>
+          );
+        })}
       </Select>
       <ErrorMessage name="error" />
     </FormControl>

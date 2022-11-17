@@ -1,5 +1,5 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
-import { getMarket } from "../../services/marketOrder";
+import { getMarket } from "../../services/market";
 import { IMarket } from "../../Types";
 
 const initialState: IMarket = {

@@ -6,10 +6,11 @@ import Layout from "./pages/Layout";
 import SignInUp from "./components/SignInUp";
 import { useAppDispatch } from "./hooks/redux";
 import { set_user } from "./state/userReducer";
-import { setToken } from "./services/marketOrder";
+import { setToken } from "./services/market";
 import MyMarket from "./components/MyMarket";
 import { initializeMarket } from "./state/marketReducer";
 import Order from "./components/Order";
+import Storage from "./components/Storage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -38,6 +39,7 @@ function App() {
           <Route path="/signin" element={<SignInUp />} />
           <Route path="/market" element={<MyMarket />} />
           <Route path="/order" element={<Order />} />
+          <Route path="/storage" element={<Storage />} />
         </Route>
       </Routes>
     </BrowserRouter>

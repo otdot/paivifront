@@ -7,7 +7,7 @@ import { IMarket, NewUser } from "../../Types";
 import AWN from "awesome-notifications";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getMarkets } from "../../services/marketOrder";
+import { getMarkets } from "../../services/market";
 import { WideSelectField } from "../Order/SelectField";
 
 const SignUp = () => {

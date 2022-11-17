@@ -14,6 +14,7 @@ export const TextField = ({ name, field, placeholder, type }: TextProps) => {
     <div style={{ marginBottom: "1rem", position: "relative" }}>
       <MuiTextField
         {...field}
+        name={name}
         fullWidth
         type={type}
         placeholder={placeholder}
