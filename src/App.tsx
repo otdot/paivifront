@@ -11,6 +11,7 @@ import MyMarket from "./components/MyMarket";
 import { initializeMarket } from "./state/marketReducer";
 import Order from "./components/Order";
 import Storage from "./components/Storage";
+import Paivi from "./components/Paivi";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -40,6 +41,7 @@ function App() {
           <Route path="/market" element={<MyMarket />} />
           <Route path="/order" element={<Order />} />
           <Route path="/storage" element={<Storage />} />
+          <Route path="/paivi" element={<Paivi />} />
         </Route>
       </Routes>
     </BrowserRouter>

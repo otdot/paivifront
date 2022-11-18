@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import UpdatePlacements from "./UpdatePlacements";
+import Divisions from "./Divisions";
 
 const MyMarket = () => {
   const dispatch = useAppDispatch();
@@ -62,6 +63,7 @@ const MyMarket = () => {
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
             Update Market Divisions
             <UpdatePlacements />
+            <Divisions divisions={market.productPlacements} />
           </Typography>
         </Grid>
       </Grid>

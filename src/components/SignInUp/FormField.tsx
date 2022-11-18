@@ -13,9 +13,8 @@ export const TextField = ({ name, field, placeholder, type }: TextProps) => {
   return (
     <div style={{ marginBottom: "1rem", position: "relative" }}>
       <MuiTextField
-        {...field}
-        name={name}
         fullWidth
+        {...field}
         type={type}
         placeholder={placeholder}
         variant="outlined"

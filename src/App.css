@@ -6,3 +6,9 @@
   box-sizing: border-box;
   font-family: "Inter Tight", sans-serif;
 }
+
+/* Capitalizing selectfields items */
+.css-6hp17o-MuiList-root-MuiMenu-list,
+.css-1ar2bnf-MuiSelect-select-MuiInputBase-input-MuiInput-input {
+  text-transform: capitalize;
+}

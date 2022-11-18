@@ -29,6 +29,18 @@ export enum Divisions {
   utilityGoods = "Utility Goods",
 }
 
+export interface Searchvalues {
+  keyword: string;
+  field: string;
+}
+
+export enum Criteria {
+  product = "Product",
+  division = "Division",
+  supplier = "Supplier",
+  lotnum = "Lot number",
+}
+
 export enum Unit {
   Kilograms = "KG",
   Packages = "PKG",

@@ -1,5 +1,5 @@
 import {
-  Button,
+  Grid,
   Table,
   TableBody,
   TableCell,
@@ -7,64 +7,46 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useAppSelector } from "../../hooks/redux";
-import { combineStorage, displayDate, sortArr } from "../../services/general";
-import { StorageProductType } from "../../Types";
+import {
+  combineStorage,
+  displayDate,
+  filterArr,
+  sortArr,
+} from "../../services/general";
+import { Searchvalues, StorageProductType } from "../../Types";
+import MethodLinks from "./MethodLinks";
+import Search from "./Search";
+import StorageTable from "./StorageTable";
 
 const Storage = () => {
   const storage = useAppSelector((state) => state.market.storage);
   const products: StorageProductType[] = sortArr(combineStorage(storage));
-  const navigate = useNavigate();
-
-  console.log(products);
+  const [values, setValues] = useState<Searchvalues>({
+    keyword: "",
+    field: "",
+  });
+  const handleSubmit = (
+    values: Searchvalues,
+    { resetForm }: { resetForm: () => void }
+  ) => {
+    setValues(values);
+    resetForm();
+  };
 
   return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "0 1rem",
-        }}
-      >
-        <Button onClick={() => navigate("/order")}>Order products</Button>
-        <Button onClick={() => navigate("/order")}>
-          Check products going Out of Date
-        </Button>
-      </div>
-      <TableContainer>
-        <Table aria-label="Storage">
-          <TableHead>
-            <TableRow>
-              <TableCell>Lot number</TableCell>
-              <TableCell>Product</TableCell>
-              <TableCell>Amount</TableCell>
-              <TableCell>Division</TableCell>
-              <TableCell>Supplier</TableCell>
-              <TableCell>Best Before</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products.map((product: StorageProductType) => (
-              <TableRow>
-                <TableCell>{product.lotnum}</TableCell>
-                <TableCell>{product.name}</TableCell>
-                <TableCell>
-                  {product.amount} {product.unit}
-                </TableCell>
-                <TableCell>{product.division}</TableCell>
-                <TableCell>{product.supplier}</TableCell>
-                <TableCell>
-                  {product.bestbefore && displayDate(product.bestbefore)}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+    <>
+      <Grid container rowSpacing={2} columnSpacing={2}>
+        <Grid item xs={12} sm={10}>
+          <Search handleSubmit={handleSubmit} />
+        </Grid>
+        <Grid item xs={12}>
+          <MethodLinks />
+        </Grid>
+      </Grid>
+      <StorageTable products={products} values={values} />
+    </>
   );
 };
 

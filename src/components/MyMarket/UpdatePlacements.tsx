@@ -1,37 +1,46 @@
 import { Button, TextField } from "@mui/material";
+import AWN from "awesome-notifications";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import * as yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { updateDivision } from "../../services/market";
+import { updateDivisions } from "../../state/marketReducer";
 import { Divisions, ProductPlacement } from "../../Types";
 import { WideSelectField } from "../Order/SelectField";
+export const divisionOptions = [
+  Divisions.fruitAndVegetables,
+  Divisions.dryAndProcessedFood,
+  Divisions.meatAndFish,
+  Divisions.dairy,
+  Divisions.bread,
+  Divisions.preparedFoods,
+  Divisions.utilityGoods,
+];
 
 const UpdatePlacements = () => {
+  const dispatch = useAppDispatch();
   const initialValues: ProductPlacement = { division: "", aisle: 1 };
   const marketid = useAppSelector((state) => state.market.id);
+
   const handleSubmit = async (
     values: ProductPlacement,
     { resetForm }: { resetForm: () => void }
   ) => {
-    console.log(values);
-    resetForm();
-    // try {
-    //   const res = await updateDivision(values, marketid);
-    //   console.log(res);
-    // } catch (err) {
-    //   console.log("Couldn't update market division", err);
-    // }
+    try {
+      dispatch(updateDivisions(values, marketid));
+      new AWN().success("Division aisle updated", {
+        durations: { success: 3000 },
+      });
+      resetForm();
+    } catch (err: unknown) {
+      let msg = "Couldn't update market division";
+      if (typeof err === "string") {
+        msg += ` ${err}`;
+      }
+      new AWN().alert(msg);
+    }
   };
-  const divisionOptions = [
-    Divisions.fruitAndVegetables,
-    Divisions.dryAndProcessedFood,
-    Divisions.meatAndFish,
-    Divisions.dairy,
-    Divisions.bread,
-    Divisions.preparedFoods,
-    Divisions.utilityGoods,
-  ];
 
   return (
     <Formik
@@ -44,15 +53,18 @@ const UpdatePlacements = () => {
         aisle: yup.number().min(1),
       })}
     >
-      {({ handleChange, values }) => (
+      {({ handleChange, handleReset, values }) => (
         <Form>
-          <WideSelectField
-            onChange={handleChange}
-            name="division"
-            label="Division"
-            options={divisionOptions}
-            placeholder="Search for workplace"
-          />
+          <div style={{ padding: "1rem 0" }}>
+            <WideSelectField
+              onChange={handleChange}
+              name="division"
+              label="Division"
+              options={divisionOptions}
+              placeholder="Search for workplace"
+              value={values.division}
+            />
+          </div>
           <Field
             fullWidth
             id="aisle"

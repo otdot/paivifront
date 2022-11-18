@@ -6,8 +6,7 @@ import {
   FormControl,
 } from "@mui/material";
 import { ErrorMessage, Field, FieldProps } from "formik";
-import { useState } from "react";
-import { Divisions, IMarket, Unit } from "../../Types";
+import { Criteria, Divisions, IMarket, Unit } from "../../Types";
 
 interface ISelectField {
   label: string;
@@ -22,9 +21,10 @@ type MarketOptions = Pick<IMarket, "name" | "id">;
 interface IWideSelectField {
   label: string;
   name: string;
-  options: MarketOptions[] | Divisions[];
+  options: MarketOptions[] | Divisions[] | Criteria[];
   onChange: (event: any, child: any) => void;
   placeholder: string;
+  value: string;
 }
 
 interface ISelectNumber {
@@ -32,8 +32,6 @@ interface ISelectNumber {
   label: string;
   onChange: (e: any) => void;
 }
-
-//value doesnt change on this component
 
 export const SelectNumber = ({ name, label, onChange }: ISelectNumber) => {
   return (
@@ -89,24 +87,29 @@ export const WideSelectField = ({
   name,
   options,
   onChange,
+  value,
 }: IWideSelectField) => {
   return (
-    <FormControl fullWidth style={{ margin: "2rem 0" }}>
+    <FormControl fullWidth>
       <InputLabel>{label}</InputLabel>
-      <Select onChange={onChange} defaultValue="" label={label} name={name}>
-        {options.map((option: any) => {
-          if (!option.id || option.name) {
+      <Select
+        value={value}
+        onChange={onChange}
+        defaultValue=""
+        label={label}
+        name={name}
+      >
+        {options.map((option: any, i: number) => {
+          if (option.id && option.name) {
             return (
-              <MenuItem key={option} value={option}>
-                {option}
+              <MenuItem key={option.id} value={option.id}>
+                {option.name}
               </MenuItem>
             );
           }
-          return (
-            <MenuItem key={option.id} value={option.id}>
-              {option.name}
-            </MenuItem>
-          );
+          <MenuItem key={i} value={option}>
+            {option}
+          </MenuItem>;
         })}
       </Select>
       <ErrorMessage name="error" />

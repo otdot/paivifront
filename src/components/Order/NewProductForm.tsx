@@ -4,7 +4,9 @@ import React, { useState } from "react";
 import { useAppDispatch } from "../../hooks/redux";
 import { createProduct } from "../../state/productReducer";
 import { NewProduct } from "../../Types";
+import { divisionOptions } from "../MyMarket/UpdatePlacements";
 import { TextField } from "../SignInUp/FormField";
+import { WideSelectField } from "./SelectField";
 
 const NewProductForm = () => {
   const dispatch = useAppDispatch();
@@ -46,27 +48,31 @@ const NewProductForm = () => {
             division: "",
           }}
         >
-          <Form>
-            <Field
-              type="text"
-              name="name"
-              placeholder="Product name"
-              component={TextField}
-            />
-            <Field
-              type="text"
-              name="supplier"
-              placeholder="Supplier"
-              component={TextField}
-            />
-            <Field
-              type="text"
-              name="division"
-              placeholder="Division"
-              component={TextField}
-            />
-            <Button type="submit">Add product</Button>
-          </Form>
+          {({ handleChange, values }) => (
+            <Form>
+              <Field
+                type="text"
+                name="name"
+                placeholder="Product name"
+                component={TextField}
+              />
+              <Field
+                type="text"
+                name="supplier"
+                placeholder="Supplier"
+                component={TextField}
+              />
+              <WideSelectField
+                onChange={handleChange}
+                name="division"
+                label="Division"
+                options={divisionOptions}
+                placeholder="Search for workplace"
+                value={values.division}
+              />
+              <Button type="submit">Add product</Button>
+            </Form>
+          )}
         </Formik>
       )}
     </>

@@ -1,6 +1,6 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
-import { getMarket } from "../../services/market";
-import { IMarket } from "../../Types";
+import { getMarket, updateDivision } from "../../services/market";
+import { IMarket, ProductPlacement } from "../../Types";
 
 const initialState: IMarket = {
   name: "",
@@ -27,6 +27,20 @@ export const initializeMarket = () => {
     try {
       const market = await getMarket();
       dispatch(set_market(market));
+    } catch (err) {
+      console.log(`an error occured while setting market: ${err}`);
+    }
+  };
+};
+
+export const updateDivisions = (values: ProductPlacement, marketid: string) => {
+  return async (dispatch: Dispatch<any>) => {
+    try {
+      const res = await updateDivision(values, marketid);
+      if (res) {
+        const market = await getMarket();
+        dispatch(set_market(market));
+      }
     } catch (err) {
       console.log(`an error occured while setting market: ${err}`);
     }

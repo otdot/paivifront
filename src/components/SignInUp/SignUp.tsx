@@ -71,7 +71,7 @@ const SignUp = () => {
         market: yup.string().required(),
       })}
     >
-      {({ handleChange }) => (
+      {({ handleChange, values }) => (
         <Form style={{ margin: "1rem" }}>
           <Field
             name="name"
@@ -103,6 +103,7 @@ const SignUp = () => {
             options={markets.map(({ name, id }) => ({ name, id }))}
             placeholder="Search for workplace"
             onChange={handleChange}
+            value={values.market}
           />
           <Button variant="contained" type="submit">
             Sign up

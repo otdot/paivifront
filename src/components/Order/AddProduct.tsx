@@ -1,7 +1,8 @@
 import { Button } from "@mui/material";
-import { Field, Form, Formik, validateYupSchema } from "formik";
+import { Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { sortArr } from "../../services/general";
 import { addOrder, delete_order } from "../../state/orderReducer";
 import { initializeProducts } from "../../state/productReducer";
 import { IOrderValues, NewProduct, Unit } from "../../Types";
@@ -13,6 +14,10 @@ const AddProduct = () => {
   const dispatch = useAppDispatch();
   const initialValues = useAppSelector((state) => state.order.editOrder);
   const products = useAppSelector((state) => state.products);
+  console.log(products);
+  const sortedproducts = sortArr(
+    products.map((p) => ({ ...p, name: p.name.toLowerCase() }))
+  );
   const orders = useAppSelector((state) => state.order.order);
   const [details, setDetails] = useState<Omit<NewProduct, "name">>({
     division: "",
@@ -67,13 +72,13 @@ const AddProduct = () => {
       initialValues={initialValues}
       onSubmit={handleSubmit}
     >
-      {({ handleChange, values }) => {
+      {({ handleChange }) => {
         return (
           <Form>
             <SelectField
               name="name"
               label="Product"
-              options={products.map((p: any) => p.name)}
+              options={sortedproducts.map((p: any) => p.name)}
               placeholder="Search for products"
               onChange={(e: any) => {
                 handleChange(e);
@@ -82,10 +87,8 @@ const AddProduct = () => {
             />
             {details.division !== "" && <Details {...details} />}
             <Field
-              id="amount"
               type="number"
               name="amount"
-              value={values.amount}
               placeholder="Amount"
               component={TextField}
             />

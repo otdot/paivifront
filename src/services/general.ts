@@ -1,4 +1,4 @@
-import { StorageProductType } from "../Types";
+import { Searchvalues, StorageProductType } from "../Types";
 
 export const getRandomDate = () => {
   const randomNum = Math.floor(Math.random() * 30) * 86400000;
@@ -42,4 +42,19 @@ export const sortArr = (arr: any) => {
 
 export const capitalize = (text: string) => {
   return `${text[0].toUpperCase()}${text.slice(1).toLowerCase()}`;
+};
+
+export const filterArr = (arr: any, searchvalues: Searchvalues) => {
+  return arr.filter((p: any) => {
+    console.log(p[searchvalues.field]);
+    if (searchvalues.keyword !== "" && searchvalues.field !== "") {
+      return p[searchvalues.field]
+        .toLowerCase()
+        .includes(searchvalues.keyword.toLowerCase());
+    }
+    if (searchvalues.keyword !== "") {
+      return p.name.toLowerCase().includes(searchvalues.keyword.toLowerCase());
+    }
+    return p;
+  });
 };

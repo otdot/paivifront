@@ -17,6 +17,7 @@ import {
 } from "../../state/orderReducer";
 import { IOrderValues, NewStorageProduct } from "../../Types";
 import classes from "./Order.module.css";
+import { initializeMarket } from "../../state/marketReducer";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ const Cart = () => {
       // clear orders after notification
       setTimeout(() => {
         dispatch(reset_orders());
+        dispatch(initializeMarket());
       }, 2000);
     } catch (err) {
       let msg = `Couldn't make order.`;
