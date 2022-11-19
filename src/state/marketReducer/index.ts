@@ -1,4 +1,6 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
+import AWN from "awesome-notifications";
+import axios from "axios";
 import { getMarket, updateDivision } from "../../services/market";
 import { IMarket, ProductPlacement } from "../../Types";
 
@@ -38,11 +40,18 @@ export const updateDivisions = (values: ProductPlacement, marketid: string) => {
     try {
       const res = await updateDivision(values, marketid);
       if (res) {
+        new AWN().success("Division aisle updated", {
+          durations: { success: 3000 },
+        });
         const market = await getMarket();
         dispatch(set_market(market));
       }
     } catch (err) {
-      console.log(`an error occured while setting market: ${err}`);
+      let msg = "Couldn't update market division";
+      if (axios.isAxiosError(err)) {
+        msg = ` ${err?.response?.data}`;
+      }
+      new AWN().alert(msg);
     }
   };
 };

@@ -7,6 +7,8 @@ import { NewProduct } from "../../Types";
 import { divisionOptions } from "../MyMarket/UpdatePlacements";
 import { TextField } from "../SignInUp/FormField";
 import { WideSelectField } from "./SelectField";
+import * as yup from "yup";
+import { capitalize } from "../../services/general";
 
 const NewProductForm = () => {
   const dispatch = useAppDispatch();
@@ -17,7 +19,13 @@ const NewProductForm = () => {
     { resetForm }: { resetForm: () => void }
   ) => {
     try {
-      dispatch(createProduct(values));
+      dispatch(
+        createProduct({
+          ...values,
+          supplier: capitalize(values.supplier),
+          name: capitalize(values.name),
+        })
+      );
       resetForm();
     } catch (err) {
       console.log(`Couldn't add new product`);
@@ -47,6 +55,11 @@ const NewProductForm = () => {
             supplier: "",
             division: "",
           }}
+          validationSchema={yup.object({
+            name: yup.string().required(),
+            supplier: yup.string().required(),
+            division: yup.string().required(),
+          })}
         >
           {({ handleChange, values }) => (
             <Form>

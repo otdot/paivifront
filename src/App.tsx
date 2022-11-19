@@ -6,7 +6,7 @@ import Layout from "./pages/Layout";
 import SignInUp from "./components/SignInUp";
 import { useAppDispatch } from "./hooks/redux";
 import { set_user } from "./state/userReducer";
-import { setToken } from "./services/market";
+import { setToken } from "./services/general";
 import MyMarket from "./components/MyMarket";
 import { initializeMarket } from "./state/marketReducer";
 import Order from "./components/Order";
@@ -19,14 +19,14 @@ function App() {
   useEffect(() => {
     const initializeUser = () => {
       const loggedUser = window.localStorage.getItem("loggedUser");
-      if (!loggedUser) {
-        console.log("No login credentials in localstorage");
-        return;
+      if (loggedUser) {
+        const user = JSON.parse(loggedUser);
+        setToken(user.token);
+        dispatch(set_user(user.name));
+        dispatch(initializeMarket());
       }
-      const user = JSON.parse(loggedUser);
-      setToken(user.token);
-      dispatch(set_user(user.name));
-      dispatch(initializeMarket());
+      console.log("No login credentials in localstorage");
+      return;
     };
 
     initializeUser();

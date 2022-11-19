@@ -27,6 +27,8 @@ export enum Divisions {
   bread = "Bread",
   preparedFoods = "Prepared Foods",
   utilityGoods = "Utility Goods",
+  frozenProducts = "Frozen products",
+  beverages = "Beverages",
 }
 
 export interface Searchvalues {
@@ -63,6 +65,14 @@ export interface StorageProductType extends NewProduct {
   lotnum: string;
   bestbefore: string;
   _id?: string;
+}
+
+export interface OutofDateProductType extends NewProduct {
+  amount: number;
+  unit: string;
+  lotnum: string;
+  bestbefore: string;
+  _id: string;
 }
 
 export interface NewUser {

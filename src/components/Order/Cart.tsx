@@ -18,12 +18,13 @@ import {
 import { IOrderValues, NewStorageProduct } from "../../Types";
 import classes from "./Order.module.css";
 import { initializeMarket } from "../../state/marketReducer";
+import axios from "axios";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
   const orders = useAppSelector((state) => state.order.order);
   const marketid = useAppSelector((state) => state.market.id);
-  console.log("marketid: ", marketid);
+
   const orderProducts = async (
     values: NewStorageProduct[]
   ): Promise<NewStorageProduct[] | void> => {
@@ -33,16 +34,14 @@ const Cart = () => {
       new AWN().success("Order successful", {
         durations: { success: 2000 },
       });
-      // clear orders after notification
       setTimeout(() => {
         dispatch(reset_orders());
         dispatch(initializeMarket());
       }, 2000);
     } catch (err) {
-      let msg = `Couldn't make order.`;
-      console.log(`Couldn't make order. Error: ${err}`);
-      if (typeof err === "string") {
-        msg += `Error: ${err}`;
+      let msg = "Couldn't update market division";
+      if (axios.isAxiosError(err)) {
+        msg = ` ${err?.response?.data}`;
       }
       new AWN().alert(msg);
     }

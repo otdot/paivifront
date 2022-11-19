@@ -1,13 +1,13 @@
-import { Button, TextField } from "@mui/material";
+import { Button, MenuItem, Select, TextField } from "@mui/material";
 import AWN from "awesome-notifications";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import * as yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { updateDivision } from "../../services/market";
 import { updateDivisions } from "../../state/marketReducer";
 import { Divisions, ProductPlacement } from "../../Types";
 import { WideSelectField } from "../Order/SelectField";
+
 export const divisionOptions = [
   Divisions.fruitAndVegetables,
   Divisions.dryAndProcessedFood,
@@ -16,6 +16,8 @@ export const divisionOptions = [
   Divisions.bread,
   Divisions.preparedFoods,
   Divisions.utilityGoods,
+  Divisions.frozenProducts,
+  Divisions.beverages,
 ];
 
 const UpdatePlacements = () => {
@@ -27,19 +29,9 @@ const UpdatePlacements = () => {
     values: ProductPlacement,
     { resetForm }: { resetForm: () => void }
   ) => {
-    try {
-      dispatch(updateDivisions(values, marketid));
-      new AWN().success("Division aisle updated", {
-        durations: { success: 3000 },
-      });
-      resetForm();
-    } catch (err: unknown) {
-      let msg = "Couldn't update market division";
-      if (typeof err === "string") {
-        msg += ` ${err}`;
-      }
-      new AWN().alert(msg);
-    }
+    console.log(values);
+    dispatch(updateDivisions(values, marketid));
+    resetForm();
   };
 
   return (

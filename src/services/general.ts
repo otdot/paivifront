@@ -1,4 +1,19 @@
-import { Searchvalues, StorageProductType } from "../Types";
+import { NewProduct, Searchvalues, StorageProductType } from "../Types";
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+let token: string | null = null;
+
+export const setToken = (userToken: string | null) => {
+  token = `bearer ${userToken}`;
+};
+export const appendToken = () => {
+  if (token === null) {
+    throw new Error("user token missing");
+  }
+  return {
+    headers: { authorization: token },
+  };
+};
 
 export const getRandomDate = () => {
   const randomNum = Math.floor(Math.random() * 30) * 86400000;
@@ -46,7 +61,6 @@ export const capitalize = (text: string) => {
 
 export const filterArr = (arr: any, searchvalues: Searchvalues) => {
   return arr.filter((p: any) => {
-    console.log(p[searchvalues.field]);
     if (searchvalues.keyword !== "" && searchvalues.field !== "") {
       return p[searchvalues.field]
         .toLowerCase()
@@ -56,5 +70,17 @@ export const filterArr = (arr: any, searchvalues: Searchvalues) => {
       return p.name.toLowerCase().includes(searchvalues.keyword.toLowerCase());
     }
     return p;
+  });
+};
+
+export const filterProductsGoingOutOfDate = (
+  storage: StorageProductType[],
+  range: number
+): StorageProductType[] => {
+  const maxDate = range * 86400000;
+  const today = new Date();
+  const date = new Date(today.getTime() + maxDate);
+  return storage.filter((product: StorageProductType) => {
+    return new Date(product.bestbefore) >= date;
   });
 };

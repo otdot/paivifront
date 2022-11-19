@@ -107,9 +107,11 @@ export const WideSelectField = ({
               </MenuItem>
             );
           }
-          <MenuItem key={i} value={option}>
-            {option}
-          </MenuItem>;
+          return (
+            <MenuItem key={i} value={option}>
+              {option}
+            </MenuItem>
+          );
         })}
       </Select>
       <ErrorMessage name="error" />

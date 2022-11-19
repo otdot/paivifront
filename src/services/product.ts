@@ -1,3 +1,4 @@
+import AWN from "awesome-notifications";
 import axios from "axios";
 import { IProduct, NewProduct } from "../Types";
 
@@ -22,5 +23,24 @@ export const addProduct = async (
     return newproduct.data;
   } catch (err) {
     console.log(`Couldn't add new product. Error: ${err}`);
+  }
+};
+
+export const removeStorageProduct = async (
+  productArr: Array<string | undefined>
+) => {
+  try {
+    productArr.forEach(async (id: string | undefined) => {
+      await axios.delete(`/storageproducts/${id}`);
+    });
+    new AWN().info(`Deleted ${productArr.length} products`, {
+      durations: { info: 3000 },
+    });
+  } catch (err) {
+    let msg = "Couldn't delete product";
+    if (axios.isAxiosError(err)) {
+      msg = ` ${err?.response?.data}`;
+    }
+    new AWN().alert(msg);
   }
 };

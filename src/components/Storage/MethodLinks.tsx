@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const MethodLinks = () => {
   const navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -12,9 +13,11 @@ const MethodLinks = () => {
       }}
     >
       <Button onClick={() => navigate("/order")}>Order products</Button>
-      <Button onClick={() => navigate("/paivi")}>
-        Check products going Out of Date
-      </Button>
+      <div style={{ display: "flex" }}>
+        <Button onClick={() => navigate("/paivi")}>
+          Check products going Out of Date
+        </Button>
+      </div>
     </div>
   );
 };

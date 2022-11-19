@@ -1,0 +1,10 @@
+.num {
+  font-size: 40;
+  cursor: pointer;
+  margin: 0 0.25rem;
+}
+
+.num:hover {
+  color: #3f51b5;
+  transform: scale(1.05);
+}

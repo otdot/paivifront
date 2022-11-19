@@ -2,14 +2,7 @@ import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import { addProduct, getProducts } from "../../services/product";
 import { IProduct, NewProduct } from "../../Types";
 
-const initialState: IProduct[] = [
-  {
-    name: "",
-    division: "",
-    supplier: "",
-    id: "",
-  },
-];
+const initialState: IProduct[] = [];
 
 const productSlice = createSlice({
   name: "productSlice",

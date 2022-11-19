@@ -1,6 +1,6 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import { login } from "../../services/login";
-import { getMarket, setToken } from "../../services/market";
+import { setToken } from "../../services/general";
 import { LoginInput } from "../../Types";
 import { User } from "../../Types";
 import { initializeMarket } from "../marketReducer";

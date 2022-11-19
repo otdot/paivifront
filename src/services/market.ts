@@ -6,14 +6,7 @@ import {
   StorageProductType,
 } from "../Types";
 import { v4 as uuid } from "uuid";
-import { getRandomDate } from "./general";
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-let token: string | null = null;
-
-export const setToken = (userToken: string | null) => {
-  token = `bearer ${userToken}`;
-};
+import { appendToken, getRandomDate } from "./general";
 
 export const getMarkets = async () => {
   const markets = await axios.get("/market");
@@ -21,12 +14,7 @@ export const getMarkets = async () => {
 };
 
 export const getMarket = async () => {
-  if (token === null) {
-    throw new Error("user token missing");
-  }
-  const config = {
-    headers: { authorization: token },
-  };
+  const config = appendToken();
   const market = await axios.get("/users/market", config);
   return market.data;
 };
@@ -35,13 +23,14 @@ export const makeOrder = async (
   id: string,
   orderArr: NewStorageProduct[]
 ): Promise<StorageProductType[]> => {
+  const config = appendToken();
   const orders: StorageProductType[] = orderArr.map((order) => ({
     ...order,
     lotnum: uuid(),
     bestbefore: getRandomDate(),
   }));
 
-  const res = await axios.patch(`/market/order/${id}`, { orders });
+  const res = await axios.patch(`/market/order/${id}`, { orders }, config);
   return res.data;
 };
 
@@ -49,7 +38,12 @@ export const updateDivision = async (
   division: ProductPlacement,
   id: string
 ): Promise<IMarket> => {
+  const config = appendToken();
   const newDivision = { productPlacements: [division] };
-  const res = await axios.patch(`/market/placements/${id}`, newDivision);
+  const res = await axios.patch(
+    `/market/placements/${id}`,
+    newDivision,
+    config
+  );
   return res.data;
 };

@@ -1,20 +1,7 @@
-import {
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import { Grid } from "@mui/material";
 import { useState } from "react";
 import { useAppSelector } from "../../hooks/redux";
-import {
-  combineStorage,
-  displayDate,
-  filterArr,
-  sortArr,
-} from "../../services/general";
+import { combineStorage, sortArr } from "../../services/general";
 import { Searchvalues, StorageProductType } from "../../Types";
 import MethodLinks from "./MethodLinks";
 import Search from "./Search";
@@ -34,6 +21,14 @@ const Storage = () => {
     setValues(values);
     resetForm();
   };
+
+  if (!window.localStorage.getItem("loggedUser")) {
+    return (
+      <div>
+        <p>Please login</p>
+      </div>
+    );
+  }
 
   return (
     <>
