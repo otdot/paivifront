@@ -34,7 +34,7 @@ const Navigation = () => {
         <Tab
           style={
             url === ""
-              ? { color: "#3f51b5", fontSize: "18px" }
+              ? { color: "#002884", fontSize: "18px" }
               : { fontSize: "18px" }
           }
           className={styles.tab}
@@ -47,7 +47,7 @@ const Navigation = () => {
           <Tab
             style={
               url === "market"
-                ? { color: "#3f51b5", fontSize: "18px" }
+                ? { color: "#002884", fontSize: "18px" }
                 : { fontSize: "18px" }
             }
             className={styles.tab}
@@ -57,7 +57,7 @@ const Navigation = () => {
           <Tab
             style={
               url === "storage"
-                ? { color: "#3f51b5", fontSize: "18px" }
+                ? { color: "#002884", fontSize: "18px" }
                 : { fontSize: "18px" }
             }
             className={styles.tab}
@@ -75,7 +75,7 @@ const Navigation = () => {
         <Tab
           style={
             url === "signin"
-              ? { color: "#3f51b5", fontSize: "18px" }
+              ? { color: "#002884", fontSize: "18px" }
               : { fontSize: "18px" }
           }
           className={styles.tab}

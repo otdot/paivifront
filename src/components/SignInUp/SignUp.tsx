@@ -5,19 +5,20 @@ import * as yup from "yup";
 import axios from "axios";
 import { IMarket, NewUser } from "../../Types";
 import AWN from "awesome-notifications";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getMarkets } from "../../services/market";
 import { WideSelectField } from "../Order/SelectField";
 
-const SignUp = () => {
-  const navigate = useNavigate();
+const SignUp = ({
+  setSwitchModal,
+}: {
+  setSwitchModal: (newValue: string) => void;
+}) => {
   const [markets, setMarkets] = useState<IMarket[]>([]);
 
   useEffect(() => {
     const initializeMarkets = async () => {
       const markets = await getMarkets();
-      console.log(markets);
       setMarkets(markets);
     };
     initializeMarkets();
@@ -39,7 +40,9 @@ const SignUp = () => {
           new AWN().success("New user created!", {
             durations: { success: 3000 },
           });
-          navigate("/signin");
+          setTimeout(() => {
+            setSwitchModal("signin");
+          }, 1500);
           resetForm();
         }
       }
@@ -105,7 +108,11 @@ const SignUp = () => {
             onChange={handleChange}
             value={values.market}
           />
-          <Button variant="contained" type="submit">
+          <Button
+            style={{ marginTop: "1rem" }}
+            variant="contained"
+            type="submit"
+          >
             Sign up
           </Button>
         </Form>

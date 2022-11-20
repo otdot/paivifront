@@ -1,8 +1,9 @@
 .header {
   display: flex;
   align-items: center;
-  background-color: rgb(214, 214, 214);
-  height: 5rem;
+  background-color: #fafafa;
+  height: 4rem;
+  filter: drop-shadow(1px 1px 2px black);
 }
 
 .container {
@@ -22,5 +23,5 @@ h1:hover {
 
 .tab:hover {
   text-decoration: underline;
-  color: #3f51b5;
+  color: #002884;
 }

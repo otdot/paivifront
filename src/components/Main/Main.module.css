@@ -4,3 +4,13 @@
   max-width: 80rem;
   margin: 0 auto;
 }
+
+.alink {
+  font-size: 14px;
+  color: black;
+}
+
+.alink:hover {
+  text-decoration: underline;
+  color: #002884;
+}

@@ -1,0 +1,15 @@
+.tabscontainer {
+  width: 100%;
+  position: relative;
+}
+
+.signin {
+  width: 50%;
+  position: absolute;
+  left: 0;
+}
+.signup {
+  width: 50%;
+  position: absolute;
+  right: 0;
+}

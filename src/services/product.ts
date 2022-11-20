@@ -19,7 +19,6 @@ export const addProduct = async (
 ): Promise<IProduct | undefined> => {
   try {
     const newproduct = await axios.post("/products", product);
-    console.log(newproduct.data);
     return newproduct.data;
   } catch (err) {
     console.log(`Couldn't add new product. Error: ${err}`);

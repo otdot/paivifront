@@ -1,8 +1,36 @@
 .footer {
   display: flex;
+  height: 3rem;
+  background-color: #fafafa;
+  width: 100%;
+  align-items: center;
+}
+
+.footercontainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.thankscontainer {
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 5rem;
-  background-color: rgb(214, 214, 214);
-  width: 100%;
+  flex-direction: row;
+}
+.thanks {
+  display: flex;
+  flex-direction: column;
+  margin: 0 1rem;
+}
+
+.thankslink {
+  font-size: 12px;
+  color: black;
+}
+
+.thankslink:hover {
+  text-decoration: underline;
+  color: #002884;
 }

@@ -9,6 +9,7 @@ import { TextField } from "../SignInUp/FormField";
 import { WideSelectField } from "./SelectField";
 import * as yup from "yup";
 import { capitalize } from "../../services/general";
+import AWN from "awesome-notifications";
 
 const NewProductForm = () => {
   const dispatch = useAppDispatch();

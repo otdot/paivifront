@@ -1,4 +1,5 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
+import AWN from "awesome-notifications";
 import { addProduct, getProducts } from "../../services/product";
 import { IProduct, NewProduct } from "../../Types";
 
@@ -36,9 +37,13 @@ export const createProduct = (newProduct: NewProduct) => {
       const product = await addProduct(newProduct);
       if (product) {
         dispatch(add_product(product));
+        new AWN().success("New product created", {
+          durations: { success: 1000 },
+        });
       }
     } catch (err) {
       console.log(`an error occured while adding product to state: ${err}`);
+      new AWN().alert("Couldn't create new product");
     }
   };
 };

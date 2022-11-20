@@ -41,7 +41,7 @@ const MyMarket = () => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            {market.personnel.length} Employee(s)
+            {market.personnel.length} Employees
           </Typography>
           <List>
             {market.personnel.map((employee: any) => (
