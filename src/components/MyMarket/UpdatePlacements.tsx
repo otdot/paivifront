@@ -29,7 +29,6 @@ const UpdatePlacements = () => {
     values: ProductPlacement,
     { resetForm }: { resetForm: () => void }
   ) => {
-    console.log(values);
     dispatch(updateDivisions(values, marketid));
     resetForm();
   };

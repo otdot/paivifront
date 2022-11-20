@@ -30,7 +30,6 @@ const SignUp = ({
   ) => {
     try {
       const { market } = values;
-      console.log(market);
       const res = await axios.post("/users", values);
       if (res) {
         const updateworkres = await axios.patch(`/users/${res.data.id}`, {

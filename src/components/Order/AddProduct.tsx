@@ -15,7 +15,6 @@ const AddProduct = () => {
   const dispatch = useAppDispatch();
   const initialValues = useAppSelector((state) => state.order.editOrder);
   const products = useAppSelector((state) => state.products);
-  console.log(products);
   const sortedproducts = sortArr(products.map((p) => ({ ...p, name: p.name })));
   const orders = useAppSelector((state) => state.order.order);
   const [details, setDetails] = useState<Omit<NewProduct, "name">>({

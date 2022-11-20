@@ -28,7 +28,6 @@ const Cart = () => {
   const orderProducts = async (
     values: NewStorageProduct[]
   ): Promise<NewStorageProduct[] | void> => {
-    console.log(values);
     try {
       await makeOrder(marketid, values);
       new AWN().success("Order successful", {
