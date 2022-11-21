@@ -49,6 +49,12 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        <div className={styles.disclaimer}>
+          <Typography variant="caption" display="block">
+            Please don't save sensitive data to the website. Data in the site is
+            fake data
+          </Typography>
+        </div>
       </Container>
     </footer>
   );

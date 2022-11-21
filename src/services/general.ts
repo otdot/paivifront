@@ -81,6 +81,6 @@ export const filterProductsGoingOutOfDate = (
   const today = new Date();
   const date = new Date(today.getTime() + maxDate);
   return storage.filter((product: StorageProductType) => {
-    return new Date(product.bestbefore) >= date;
+    return new Date(product.bestbefore) <= date;
   });
 };
