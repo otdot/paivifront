@@ -70,12 +70,15 @@ const SignUp = ({
       onSubmit={handleSubmit}
       validationSchema={yup.object({
         name: yup.string().min(1).max(30),
-        position: yup.string().min(5).max(10),
+        position: yup.string(),
         password: yup.string().min(5).max(50),
         confirmpassword: yup
           .string()
-          .oneOf([yup.ref("password"), null])
-          .required("Password and confirm password must match"),
+          .oneOf([
+            yup.ref("password"),
+            "Password and confirm password must match",
+          ])
+          .required(),
         market: yup.string().required(),
       })}
     >

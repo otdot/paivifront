@@ -20,9 +20,9 @@ export interface IOrderSliceInitial {
 }
 
 export enum Positions {
-  storeOwner = "Store owner",
+  storeOwner = "Owner",
   supervisor = "Supervisor",
-  salesPerson = "Sales person",
+  salesPerson = "Salesperson",
 }
 
 export enum Divisions {
