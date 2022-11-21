@@ -19,6 +19,12 @@ export interface IOrderSliceInitial {
   editOrder: IOrderValues;
 }
 
+export enum Positions {
+  storeOwner = "Store owner",
+  supervisor = "Supervisor",
+  salesPerson = "Sales person",
+}
+
 export enum Divisions {
   fruitAndVegetables = "Fruit and Vegetables",
   dryAndProcessedFood = "Dry and Processed Food",

@@ -3,7 +3,7 @@ import { TextField } from "./FormField";
 import { Button } from "@mui/material";
 import * as yup from "yup";
 import axios from "axios";
-import { IMarket, NewUser } from "../../Types";
+import { IMarket, NewUser, Positions } from "../../Types";
 import AWN from "awesome-notifications";
 import { useEffect, useState } from "react";
 import { getMarkets } from "../../services/market";
@@ -52,6 +52,12 @@ const SignUp = ({
     }
   };
 
+  const positionoptions = [
+    Positions.storeOwner,
+    Positions.supervisor,
+    Positions.salesPerson,
+  ];
+
   return (
     <Formik
       initialValues={{
@@ -81,12 +87,16 @@ const SignUp = ({
             type="text"
             component={TextField}
           />
-          <Field
-            name="position"
-            placeholder="Position"
-            type="text"
-            component={TextField}
-          />
+          <div style={{ marginBottom: "1rem" }}>
+            <WideSelectField
+              name="position"
+              label="Position"
+              options={positionoptions}
+              placeholder="Add Position"
+              onChange={handleChange}
+              value={values.position}
+            />
+          </div>
           <Field
             name="password"
             placeholder="Password"

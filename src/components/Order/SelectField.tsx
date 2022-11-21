@@ -6,7 +6,7 @@ import {
   FormControl,
 } from "@mui/material";
 import { ErrorMessage, Field, FieldProps } from "formik";
-import { Criteria, Divisions, IMarket, Unit } from "../../Types";
+import { Criteria, Divisions, IMarket, Positions, Unit } from "../../Types";
 
 interface ISelectField {
   label: string;
@@ -21,7 +21,7 @@ type MarketOptions = Pick<IMarket, "name" | "id">;
 interface IWideSelectField {
   label: string;
   name: string;
-  options: MarketOptions[] | Divisions[] | Criteria[];
+  options: MarketOptions[] | Divisions[] | Criteria[] | Positions[];
   onChange: (event: any, child: any) => void;
   placeholder: string;
   value: string;
