@@ -10,6 +10,7 @@ import AWN from "awesome-notifications";
 import axios from "axios";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { displayDate } from "../../services/general";
 import { removeStorageProduct } from "../../services/product";
 import { initializeMarket } from "../../state/marketReducer";
 import { StorageProductType } from "../../Types";
@@ -47,6 +48,9 @@ const Product = ({ product }: { product: StorageProductType }) => {
           </Typography>
           <Typography variant="h5" component="div">
             {product.name}
+          </Typography>
+          <Typography variant="overline" component="div">
+            Best before {displayDate(product.bestbefore)}
           </Typography>
           <div
             style={{ marginTop: "0.25rem", marginBottom: "1rem" }}

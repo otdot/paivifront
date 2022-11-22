@@ -102,7 +102,7 @@ const AddProduct = () => {
               label="Unit"
               options={unitOptions}
               onChange={handleChange}
-              placeholder="Search for products"
+              placeholder="Add unit"
             />
             <Button variant="contained" type="submit">
               Add Product

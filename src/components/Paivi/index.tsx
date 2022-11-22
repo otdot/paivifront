@@ -36,6 +36,8 @@ const Paivi = () => {
     }
   };
 
+  console.log(storage);
+
   return (
     <Grid container rowSpacing={2} columnSpacing={2}>
       <Grid item xs={12}>
@@ -52,7 +54,7 @@ const Paivi = () => {
       </Grid>
       <Grid item xs={12}>
         <Typography variant="h6" component="div">
-          Out of Date Products
+          Out of Date Products in {range} {range === 1 ? "day" : "days"}
         </Typography>
       </Grid>
       {storage.map((product: StorageProductType) => (

@@ -38,11 +38,16 @@ export const combineStorage = (storage: StorageProductType[]) => {
       if (!whole[`${curr.name}${curr.unit}`]) {
         whole[`${curr.name}${curr.unit}`] = { ...curr, name, division };
       } else {
+        const bestbefore =
+          whole[`${curr.name}${curr.unit}`].bestbefore <= curr.bestbefore
+            ? whole[`${curr.name}${curr.unit}`].bestbefore
+            : curr.bestbefore;
         const temp = {
           ...curr,
           amount: whole[`${curr.name}${curr.unit}`].amount + curr.amount,
           name,
           division,
+          bestbefore,
         };
         whole[`${curr.name}${curr.unit}`] = temp;
       }
