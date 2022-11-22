@@ -1,4 +1,5 @@
 import { Grid } from "@mui/material";
+import { style } from "@mui/system";
 import { useState } from "react";
 import { useAppSelector } from "../../hooks/redux";
 import { combineStorage, sortArr } from "../../services/general";
@@ -6,6 +7,7 @@ import { Searchvalues, StorageProductType } from "../../Types";
 import MethodLinks from "./MethodLinks";
 import Search from "./Search";
 import StorageTable from "./StorageTable";
+import StorageTableforPhone from "./StorageTableforPhone";
 
 const Storage = () => {
   const storage = useAppSelector((state) => state.market.storage);
@@ -41,6 +43,7 @@ const Storage = () => {
         </Grid>
       </Grid>
       <StorageTable products={products} values={values} />
+      <StorageTableforPhone products={products} values={values} />
     </>
   );
 };

@@ -1,6 +1,5 @@
 import Navigation from "./Navigation";
-import { Container, Tab } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Container } from "@mui/material";
 import styles from "./Header.module.css";
 
 const Header = () => {

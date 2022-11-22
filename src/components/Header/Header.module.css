@@ -25,3 +25,16 @@ h1:hover {
   text-decoration: underline;
   color: #002884;
 }
+.phonenavigation {
+  display: none;
+}
+
+@media (max-width: 630px) {
+  .phonenavigation {
+    display: block;
+  }
+
+  .mainnavigation {
+    display: none;
+  }
+}

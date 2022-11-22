@@ -1,6 +1,6 @@
 import { Button, InputLabel } from "@mui/material";
 import { Field, Form, Formik } from "formik";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAppDispatch } from "../../hooks/redux";
 import { createProduct } from "../../state/productReducer";
 import { NewProduct } from "../../Types";
@@ -9,7 +9,6 @@ import { TextField } from "../SignInUp/FormField";
 import { WideSelectField } from "./SelectField";
 import * as yup from "yup";
 import { capitalize } from "../../services/general";
-import AWN from "awesome-notifications";
 
 const NewProductForm = () => {
   const dispatch = useAppDispatch();

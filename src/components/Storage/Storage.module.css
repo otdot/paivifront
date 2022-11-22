@@ -1,0 +1,13 @@
+.phonetable {
+  display: none;
+}
+
+@media (max-width: 650px) {
+  .table {
+    display: none;
+  }
+
+  .phonetable {
+    display: block;
+  }
+}

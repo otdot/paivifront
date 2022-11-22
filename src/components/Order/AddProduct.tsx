@@ -76,7 +76,7 @@ const AddProduct = () => {
         amount: yup.number().min(1).required(),
       })}
     >
-      {({ handleChange, setFieldValue, values }) => {
+      {({ handleChange }) => {
         return (
           <Form>
             <SelectField
