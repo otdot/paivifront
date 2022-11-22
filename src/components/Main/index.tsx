@@ -9,17 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getMarkets } from "../../services/market";
 import { IMarket } from "../../Types";
 import styles from "./Main.module.css";
 
 const Main = () => {
   const [markets, setMarkets] = useState<IMarket[]>([]);
-  const employeeCount = markets
-    .map((market) => market.personnel.length)
-    .reduce((a, b) => {
-      return a + b;
-    }, 0);
 
   useEffect(() => {
     const initializeMarkets = async () => {
@@ -42,10 +38,7 @@ const Main = () => {
           <Typography variant="body2" component="div">
             Application that manages storages products and automates storage
             self-monitoring of products.{" "}
-            <a className={styles.alink} href="signin">
-              Please login or sign up here
-            </a>
-            .
+            <Link to="/signin">Please login or sign up here</Link>.
           </Typography>
           <Typography variant="caption" display="block">
             Please don't save sensitive data to the website. Data in the site is
