@@ -1,8 +1,8 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import AWN from "awesome-notifications";
-import axios from "axios";
 import { getMarket, updateDivision } from "../../services/market";
-import { IMarket, ProductPlacement } from "../../Types";
+import { IMarket, ProductPlacement } from "../../Types";import axios from "axios";
+;
 
 const initialState: IMarket = {
   name: "",

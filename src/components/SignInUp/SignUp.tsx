@@ -2,12 +2,12 @@ import { Formik, Form, Field } from "formik";
 import { TextField } from "./FormField";
 import { Button } from "@mui/material";
 import * as yup from "yup";
-import axios from "axios";
 import { IMarket, NewUser, Positions } from "../../Types";
 import AWN from "awesome-notifications";
 import { useEffect, useState } from "react";
 import { getMarkets } from "../../services/market";
 import { WideSelectField } from "../Order/SelectField";
+import axiosInstance from "../../axiosConfig";
 
 const SignUp = ({
   setSwitchModal,
@@ -30,9 +30,9 @@ const SignUp = ({
   ) => {
     try {
       const { market } = values;
-      const res = await axios.post("/users", values);
+      const res = await axiosInstance.post("/users", values);
       if (res) {
-        const updateworkres = await axios.patch(`/users/${res.data.id}`, {
+        const updateworkres = await axiosInstance.patch(`/users/${res.data.id}`, {
           id: market,
         });
         if (updateworkres.status === 200) {

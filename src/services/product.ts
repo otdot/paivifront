@@ -1,16 +1,17 @@
 import AWN from "awesome-notifications";
-import axios from "axios";
+import axiosInstance from "../axiosConfig";
 import { IProduct, NewProduct } from "../Types";
+import axios from "axios";;
 
 export const getProducts = async (): Promise<IProduct[]> => {
-  const products = await axios.get("/products");
+  const products = await axiosInstance.get("/products");
   return products.data.product;
 };
 
 export const getProductDetails = async (
   id: string
 ): Promise<IProduct | undefined> => {
-  const product = await axios.get(`/products/${id}`);
+  const product = await axiosInstance.get(`/products/${id}`);
   return product.data;
 };
 
@@ -18,7 +19,7 @@ export const addProduct = async (
   product: NewProduct
 ): Promise<IProduct | undefined> => {
   try {
-    const newproduct = await axios.post("/products", product);
+    const newproduct = await axiosInstance.post("/products", product);
     return newproduct.data;
   } catch (err) {
     console.log(`Couldn't add new product. Error: ${err}`);
@@ -30,7 +31,7 @@ export const removeStorageProduct = async (
 ) => {
   try {
     productArr.forEach(async (id: string | undefined) => {
-      await axios.delete(`/storageproducts/${id}`);
+      await axiosInstance.delete(`/storageproducts/${id}`);
     });
     new AWN().info(`Deleted ${productArr.length} products`, {
       durations: { info: 3000 },

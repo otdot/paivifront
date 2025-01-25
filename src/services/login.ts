@@ -1,7 +1,7 @@
-import axios from "axios";
-import { LoginInput } from "../Types";
+import axiosInstance from "../axiosConfig";
+import { LoginInput } from "../Types";;
 
 export const login = async (credentials: LoginInput) => {
-  const res = await axios.post("/login", credentials);
+  const res = await axiosInstance.post("/login", credentials);
   return res.data;
 };

@@ -1,7 +1,6 @@
 import { Button, Grid, Typography } from "@mui/material";
 import AWN from "awesome-notifications";
-import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
@@ -11,6 +10,7 @@ import { initializeMarket } from "../../state/marketReducer";
 import { StorageProductType } from "../../Types";
 import Product from "./Product";
 import Range from "./Range";
+import axios from "axios";
 
 const Paivi = () => {
   const navigate = useNavigate();

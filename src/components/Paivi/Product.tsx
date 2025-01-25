@@ -7,13 +7,12 @@ import {
   Typography,
 } from "@mui/material";
 import AWN from "awesome-notifications";
-import axios from "axios";
-import React from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { displayDate } from "../../services/general";
 import { removeStorageProduct } from "../../services/product";
 import { initializeMarket } from "../../state/marketReducer";
 import { StorageProductType } from "../../Types";
+import axios from "axios";
 
 const Product = ({ product }: { product: StorageProductType }) => {
   const dispatch = useAppDispatch();
