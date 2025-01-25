@@ -1,4 +1,4 @@
-import axiosInstance from "../axiosConfig";
+import axios from "axios";
 import {
   IMarket,
   NewStorageProduct,
@@ -9,13 +9,13 @@ import { v4 as uuid } from "uuid";
 import { appendToken, getRandomDate } from "./general";
 
 export const getMarkets = async () => {
-  const markets = await axiosInstance.get("/market");
+  const markets = await axios.get("/market");
   return markets.data;
 };
 
 export const getMarket = async () => {
   const config = appendToken();
-  const market = await axiosInstance.get("/users/market", config);
+  const market = await axios.get("/users/market", config);
   return market.data;
 };
 
@@ -30,7 +30,7 @@ export const makeOrder = async (
     bestbefore: getRandomDate(),
   }));
 
-  const res = await axiosInstance.patch(`/market/order/${id}`, { orders }, config);
+  const res = await axios.patch(`/market/order/${id}`, { orders }, config);
   return res.data;
 };
 
@@ -40,7 +40,7 @@ export const updateDivision = async (
 ): Promise<IMarket> => {
   const config = appendToken();
   const newDivision = { productPlacements: [division] };
-  const res = await axiosInstance.patch(
+  const res = await axios.patch(
     `/market/placements/${id}`,
     newDivision,
     config
