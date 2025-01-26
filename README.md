@@ -3,4 +3,4 @@
 - `npm install`
 - start with `npm start`
 - backend at otdot/paiviback
-- deployed in https://paivipaivittaja.fly.dev/
+- deployed in https://otdot.fi
