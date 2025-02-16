@@ -9,7 +9,7 @@ import { v4 as uuid } from "uuid";
 import { appendToken, getRandomDate } from "./general";
 
 export const getMarkets = async () => {
-  const markets = await axios.get("/market");
+  const markets = await axios.get("/markets");
   return markets.data;
 };
 
@@ -30,7 +30,7 @@ export const makeOrder = async (
     bestbefore: getRandomDate(),
   }));
 
-  const res = await axios.patch(`/market/order/${id}`, { orders }, config);
+  const res = await axios.patch(`/markets/order/${id}`, { orders }, config);
   return res.data;
 };
 
@@ -41,7 +41,7 @@ export const updateDivision = async (
   const config = appendToken();
   const newDivision = { productPlacements: [division] };
   const res = await axios.patch(
-    `/market/placements/${id}`,
+    `/markets/placements/${id}`,
     newDivision,
     config
   );

@@ -14,7 +14,7 @@ const MethodLinks = () => {
     >
       <Button onClick={() => navigate("/order")}>Order products</Button>
       <div style={{ display: "flex" }}>
-        <Button onClick={() => navigate("/paivi")}>
+        <Button onClick={() => navigate("/expiredproducts")}>
           Check products going Out of Date
         </Button>
       </div>

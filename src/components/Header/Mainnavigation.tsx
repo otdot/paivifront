@@ -1,55 +1,38 @@
 import { Tab } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../hooks/redux";
-import { set_market } from "../../state/marketReducer";
-import { userLogout } from "../../state/userReducer";
 import styles from "./Header.module.css";
 
-const Mainnavigation = ({ url }: { url: string }) => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+export interface TabProps {
+  className: (typeof styles)[keyof typeof styles];
+  label: string;
+  onClick: () => void;
+}
 
-  const handleLogout = () => {
-    console.log("logging out");
-    dispatch(userLogout());
-    dispatch(
-      set_market({
-        name: "",
-        personnel: [],
-        productPlacements: [],
-        storage: [],
-        id: "",
-      })
-    );
-  };
+interface MainnavigationProps {
+  tabs: TabProps[];
+}
+
+const Mainnavigation = ({ tabs }: MainnavigationProps) => {
+  const url =
+    window.location.href.split("/")[window.location.href.split("/").length - 1];
+
   return (
     <>
-      <Tab
-        style={
-          url === "market"
-            ? { color: "#002884", fontSize: "18px" }
-            : { fontSize: "18px" }
-        }
-        className={styles.tab}
-        label="MyMarket"
-        onClick={() => navigate("/market")}
-      />
-      <Tab
-        style={
-          url === "storage"
-            ? { color: "#002884", fontSize: "18px" }
-            : { fontSize: "18px" }
-        }
-        className={styles.tab}
-        label="Storage"
-        onClick={() => navigate("/storage")}
-      />
-      <Tab
-        style={{ fontSize: "18px" }}
-        className={styles.tab}
-        label="Logout"
-        onClick={handleLogout}
-      />
+      {tabs.map((tab) => {
+        const isActiveTab = tab.label
+          .replaceAll(" ", "")
+          .toLowerCase()
+          .includes(url);
+        return (
+          <Tab
+            style={
+              isActiveTab
+                ? { color: "#002884", fontSize: "18px" }
+                : { fontSize: "18px" }
+            }
+            {...tab}
+          />
+        );
+      })}
     </>
   );
 };

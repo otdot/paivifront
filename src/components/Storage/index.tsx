@@ -8,9 +8,13 @@ import MethodLinks from "./MethodLinks";
 import Search from "./Search";
 import StorageTable from "./StorageTable";
 import StorageTableforPhone from "./StorageTableforPhone";
+import DrawerNav from "../DrawerNav";
+import navigations from "../../constants/navigations";
+import { useNavigate } from "react-router-dom";
 
 const Storage = () => {
   const storage = useAppSelector((state) => state.market.storage);
+  const navigate = useNavigate();
   const products: StorageProductType[] = sortArr(combineStorage(storage));
   const [values, setValues] = useState<Searchvalues>({
     keyword: "",
@@ -34,6 +38,7 @@ const Storage = () => {
 
   return (
     <>
+      <DrawerNav anchor="left" isOpen={true} />
       <Grid container rowSpacing={2} columnSpacing={2}>
         <Grid item xs={12} sm={10}>
           <Search handleSubmit={handleSubmit} />

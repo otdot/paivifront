@@ -11,8 +11,9 @@ import { StorageProductType } from "../../Types";
 import Product from "./Product";
 import Range from "./Range";
 import axios from "axios";
+import DrawerNav from "../DrawerNav";
 
-const Paivi = () => {
+const ExpiredProducts = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [range, setRange] = useState(1);
@@ -39,31 +40,34 @@ const Paivi = () => {
   console.log(storage);
 
   return (
-    <Grid container rowSpacing={2} columnSpacing={2}>
-      <Grid item xs={12}>
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <Range range={range} setRange={setRange} />
-          <Button
-            onClick={removeAllOutofDateStorageProducts}
-            variant="contained"
-            color="error"
-          >
-            Remove All
-          </Button>
-        </div>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="h6" component="div">
-          Out of Date Products in {range} {range === 1 ? "day" : "days"}
-        </Typography>
-      </Grid>
-      {storage.map((product: StorageProductType) => (
-        <Grid key={product._id} item xs={12} sm={4} md={3}>
-          <Product product={product} />
+    <>
+      <DrawerNav anchor="left" isOpen={true} />
+      <Grid container rowSpacing={2} columnSpacing={2}>
+        <Grid item xs={12}>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <Range range={range} setRange={setRange} />
+            <Button
+              onClick={removeAllOutofDateStorageProducts}
+              variant="contained"
+              color="error"
+            >
+              Remove All
+            </Button>
+          </div>
         </Grid>
-      ))}
-    </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h6" component="div">
+            Out of Date Products in {range} {range === 1 ? "day" : "days"}
+          </Typography>
+        </Grid>
+        {storage.map((product: StorageProductType) => (
+          <Grid key={product._id} item xs={12} sm={4} md={3}>
+            <Product product={product} />
+          </Grid>
+        ))}
+      </Grid>
+    </>
   );
 };
 
-export default Paivi;
+export default ExpiredProducts;

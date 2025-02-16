@@ -1,9 +1,14 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
-import { login } from "../../services/login";
 import { setToken } from "../../services/general";
-import { LoginInput } from "../../Types";
 import { User } from "../../Types";
 import { initializeMarket } from "../marketReducer";
+import AWN from "awesome-notifications";
+
+interface LoginResponse {
+  token: string, 
+  name: string, 
+  id: string 
+}
 
 const initialState: User = { name: null };
 
@@ -27,10 +32,9 @@ export const userLogout = () => {
   };
 };
 
-export const setLoginData = (credentials: LoginInput) => {
+export const setLoginData = (res: LoginResponse) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const res = await login(credentials);
       window.localStorage.setItem("loggedUser", JSON.stringify(res));
       dispatch(set_user(res.name));
       setToken(res.token);

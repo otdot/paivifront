@@ -1,0 +1,15 @@
+.drawerNavOpenButton {
+  position: fixed;
+  top: 0.8rem;
+  left: 7rem;
+  z-index: 999999;
+  transition: 250ms ease;
+}
+
+.drawerNavClosedButton {
+  position: fixed;
+  top: 0.8rem;
+  left: 0rem;
+  z-index: 999999;
+  transition: 250ms ease;
+}
